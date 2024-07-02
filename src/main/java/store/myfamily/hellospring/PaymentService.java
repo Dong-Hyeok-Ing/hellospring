@@ -17,7 +17,6 @@ public class PaymentService {
 
     public Payment prepare(Long orderId,String currency,BigDecimal foreignCurrencyAmount) throws IOException {
         //환율 가져오기
-        //https://open.er-api.com/v6/latest/USD
         BigDecimal exRate = getExRate();
         // 금액 계산
         BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exRate);
@@ -27,7 +26,7 @@ public class PaymentService {
         return new Payment(orderId, currency, foreignCurrencyAmount, exRate, convertedAmount, validUntil);
     }
 
-    private static BigDecimal getExRate() throws IOException {
+    private BigDecimal getExRate() throws IOException {
         URL url = new URL("https://open.er-api.com/v6/latest/USD");
         URLConnection connection = (HttpURLConnection) url.openConnection();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
