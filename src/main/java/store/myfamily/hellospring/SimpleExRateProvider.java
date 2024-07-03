@@ -3,9 +3,8 @@ package store.myfamily.hellospring;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class SimpleExRatePaymentService extends PaymentService{
+public class SimpleExRateProvider {
 
-    @Override
     BigDecimal getExRate(String currency) throws IOException {
         if (currency.equals("USD")) return BigDecimal.valueOf(1000);
 
