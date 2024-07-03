@@ -12,7 +12,7 @@ import java.net.URLConnection;
 import java.util.stream.Collectors;
 
 public class WebApiExRateProvider {
-    BigDecimal getWebExRate(String currency) throws IOException {
+    BigDecimal getExRate(String currency) throws IOException {
         URL url = new URL("https://open.er-api.com/v6/latest/USD");
         URLConnection connection = (HttpURLConnection) url.openConnection();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));

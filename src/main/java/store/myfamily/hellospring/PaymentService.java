@@ -15,11 +15,23 @@ import java.util.stream.Collectors;
 
 public class PaymentService {
 
+    private final WebApiExRateProvider exRateProvider;
+    private final SimpleExRateProvider simpleExRateProvider;
+
+    public PaymentService() {
+        this.exRateProvider = new WebApiExRateProvider();
+        this.simpleExRateProvider = new SimpleExRateProvider();
+    }
+
+
     public Payment prepare(Long orderId,String currency,BigDecimal foreignCurrencyAmount) throws IOException {
 
+        /* 요렇게 사용하던걸 위에 처럼.
+        SimpleExRateProvider simpleExRateProvider = new SimpleExRateProvider();
         WebApiExRateProvider exRateProvider = new WebApiExRateProvider();
+        */
         //환율 가져오기
-        BigDecimal exRate = exRateProvider.getWebExRate(currency);
+        BigDecimal exRate = simpleExRateProvider.getExRate(currency);
         // 금액 계산
         BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exRate);
         // 유효 시간 계산
