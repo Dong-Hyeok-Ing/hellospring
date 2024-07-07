@@ -15,12 +15,11 @@ import java.util.stream.Collectors;
 
 public class PaymentService {
 
-    private final WebApiExRateProvider exRateProvider;
-    private final SimpleExRateProvider simpleExRateProvider;
+    private final ExRateProvider exRateProvider;
 
     public PaymentService() {
         this.exRateProvider = new WebApiExRateProvider();
-        this.simpleExRateProvider = new SimpleExRateProvider();
+        /*this.exRateProvider = new SimpleExRateProvider();*/
     }
 
 
@@ -31,7 +30,7 @@ public class PaymentService {
         WebApiExRateProvider exRateProvider = new WebApiExRateProvider();
         */
         //환율 가져오기
-        BigDecimal exRate = simpleExRateProvider.getExRate(currency);
+        BigDecimal exRate = exRateProvider.getExRate(currency);
         // 금액 계산
         BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exRate);
         // 유효 시간 계산
